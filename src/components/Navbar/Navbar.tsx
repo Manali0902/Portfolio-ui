@@ -27,7 +27,7 @@ export default function Navbar({ visible, isDarkMode, toggleTheme }: NavbarProps
         <header className={`navbar ${visible ? 'navbar--visible' : ''} ${isDarkMode ? 'dark' : ''}`}>
             <Link to="/" className="navbar__brand" aria-label="Home">
                 <img
-                    src={isDarkMode ? '/logo-white.png' : '/logo-black.png'}
+                    src={isDarkMode ? '/Portfolio-ui/logo-white.png' : '/Portfolio-ui/logo-black.png'}
                     alt="Manali Gandhi Logo"
                     className="navbar__logo"
                 />

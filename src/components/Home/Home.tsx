@@ -17,7 +17,7 @@ export default function Home({ hasScrolled }: HomeProps) {
         if (!ctx) return;
 
         const img = new window.Image();
-        img.src = '/subject.png';
+        img.src = '/Portfolio-ui/subject.png';
         img.onload = () => {
             canvas.width = img.width;
             canvas.height = img.height;
