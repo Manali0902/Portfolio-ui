@@ -1,24 +1,122 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Light Theme Colors */
+  --bg-primary: #f8fafc;
+  --bg-gradient: radial-gradient(circle at top right, #e0e7ff, #f8fafc, #fae8ff);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.8);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+
+  --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  --accent-glow: rgba(139, 92, 246, 0.4);
+}
+
+.dark {
+  /* Dark Theme Colors */
+  --bg-primary: #020617;
+  --bg-gradient: radial-gradient(circle at top right, #1e1b4b, #020617, #0f172a);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+
+  --glass-bg: rgba(15, 23, 42, 0.3);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+  --accent-gradient: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%);
+  --accent-glow: rgba(192, 132, 252, 0.4);
+}
 
 body {
   margin: 0;
   padding: 0;
   background-color: transparent;
-  font-family: 'Inter', sans-serif;
-  color: #1e293b;
+  font-family: var(--font-body);
+  color: var(--text-primary);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
 }
 
 .app-container {
-  /* Let content drive the height for natural scrolling */
   min-height: 100vh;
   width: 100vw;
   position: relative;
-  background-color: #deebfd;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  background-size: cover;
+  transition: background 0.5s ease;
 }
 
-.app-container.dark {
-  background-color: #0f172a;
-  color: #f8fafc;
+/* Subtle animated background shapes */
+.app-container::before,
+.app-container::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
+  opacity: 0.5;
+  pointer-events: none;
+  transition: all 1s ease;
+}
+
+.app-container::before {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background-color: rgba(139, 92, 246, 0.15);
+  animation: float1 15s infinite alternate ease-in-out;
+}
+
+.app-container::after {
+  bottom: -10%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background-color: rgba(59, 130, 246, 0.15);
+  animation: float2 20s infinite alternate ease-in-out;
+}
+
+.app-container.dark::before {
+  background-color: rgba(139, 92, 246, 0.1);
+}
+
+.app-container.dark::after {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+@keyframes float1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(10%, 10%) scale(1.1);
+  }
+}
+
+@keyframes float2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(-10%, -10%) scale(1.05);
+  }
 }
