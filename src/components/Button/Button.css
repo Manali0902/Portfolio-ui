@@ -1,0 +1,101 @@
+.custom-button {
+    background-color: #ffffff;
+    /* User specifically requested: border radius same as 25px, border as 1px solid #000, and text all in black */
+    border: 1px solid #000;
+    border-radius: 25px;
+    color: #000;
+    /* User requested padding to be 10px from all sides for content */
+    padding: 10px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+    position: relative;
+    /* required so the pseudo tooltip calculates bounds from button */
+}
+
+.custom-button:hover {
+    /* User requested button to scale/enlarge a little bit on hover */
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
+}
+
+.custom-button:active {
+    transform: translateY(10px) scale(0.95);
+}
+
+.custom-button.floating {
+    position: fixed;
+    top: 12px;
+    right: 20px;
+    z-index: 1001;
+    /* Always above the navbar (z-index 999) */
+}
+
+/* Global Dark Mode modifiers */
+.dark .custom-button {
+    background-color: #3f5472;
+    border-color: #f8fafc;
+    color: #f8fafc;
+}
+
+.dark .custom-button:hover {
+    box-shadow: 0 6px 12px -2px rgba(255, 255, 255, 0.15);
+}
+
+
+/* --- CSS Native Tooltip (Configured to render explicitly fast ~1.5ms) --- */
+.custom-button[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -36px;
+    right: 0;
+    background: #000;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.dark .custom-button[data-tooltip]::after {
+    background: #f8fafc;
+    /* Inverted so it pops in dark mode */
+    color: #000;
+}
+
+.custom-button[data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+    /* Using exactly the 1.5ms transition delay for fast opening natively without JS */
+    transition-delay: 500ms;
+}
+
+/* --- Responsive Button Layout (Mobile) --- */
+@media screen and (max-width: 768px) {
+    .custom-button.floating {
+        /* Move button down and right slightly so it fits beautifully in the top corner of mobile screens without clashing with the portrait */
+        top: 20px;
+        right: 20px;
+        /* Reduce padding slightly */
+        padding: 8px;
+    }
+
+    .custom-button[data-tooltip]::after {
+        /* Ensure tooltip doesn't clip off the right edge of a narrow mobile screen */
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
