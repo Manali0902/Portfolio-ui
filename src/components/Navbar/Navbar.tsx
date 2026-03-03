@@ -36,7 +36,7 @@ export default function Navbar({ visible, isDarkMode, toggleTheme }: NavbarProps
 
             {/* Desktop Navigation */}
             <nav className="navbar__links desktop-only">
-                <Link to="/projects" className="navbar__link">Projects</Link>
+                {/* <Link to="/projects" className="navbar__link">Projects</Link> */}
                 <Link to="/experiences" className="navbar__link">Experiences</Link>
                 <Link to="/academics" className="navbar__link">Academics</Link>
                 <Link to="/contact" className="navbar__link">Contact Me</Link>
@@ -73,7 +73,7 @@ export default function Navbar({ visible, isDarkMode, toggleTheme }: NavbarProps
                     </button>
                 </div>
                 <nav className="navbar__drawer-links">
-                    <Link to="/projects" className="navbar__drawer-link">Projects</Link>
+                    {/* <Link to="/projects" className="navbar__drawer-link">Projects</Link> */}
                     <Link to="/experiences" className="navbar__drawer-link">Experiences</Link>
                     <Link to="/academics" className="navbar__drawer-link">Academics</Link>
                     <Link to="/contact" className="navbar__drawer-link">Contact Me</Link>

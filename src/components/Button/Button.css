@@ -1,11 +1,9 @@
 .custom-button {
     background-color: #ffffff;
-    /* User specifically requested: border radius same as 25px, border as 1px solid #000, and text all in black */
-    border: 1px solid #000;
+    border: none;
     border-radius: 25px;
     color: #000;
-    /* User requested padding to be 10px from all sides for content */
-    padding: 10px;
+    padding: 16px;
     font-family: inherit;
     font-size: 0.95rem;
     font-weight: 600;
@@ -42,7 +40,6 @@
 /* Global Dark Mode modifiers */
 .dark .custom-button {
     background-color: #3f5472;
-    border-color: #f8fafc;
     color: #f8fafc;
 }
 

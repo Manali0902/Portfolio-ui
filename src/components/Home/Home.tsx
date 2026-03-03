@@ -49,7 +49,7 @@ export default function Home({ hasScrolled }: HomeProps) {
 
                 <div className="text-wrapper">
                     <h1 className="name-highlight">Manali Gandhi</h1>
-                    <p className="role-text">Software Developer at Paycom</p>
+                    <p className="role-text">Software Developer III at Paycom</p>
                     <div style={{ marginTop: '20px' }}>
                         <Button
                             aria-label="Scroll down"
@@ -80,17 +80,28 @@ export default function Home({ hasScrolled }: HomeProps) {
 
                 {/* 2. Text Paragraph Block Example */}
                 <div className="content-block text-block">
-                    <h3 className="content-heading">Skills & Experience</h3>
-                    <p>I have spent years building robust software at Paycom and exploring technologies. I specialize in building responsive, scalable, and beautifully animated frontend architectures in React and TypeScript while tackling complex backend implementations.</p>
+                    <h3 className="content-heading">Technical Skills & Expertise</h3>
+                    <p style={{ textAlign: 'left', lineHeight: '2' }}>
+                        <b>Frontend:</b> React, TypeScript, Redux, Angular, React Native, Javascript (ES3, ES5, ES6), HTML, CSS, SCSS, jQuery<br />
+                        <b>Backend:</b> Node, Express, Rest APIs, JWT Authentication, PHP (View-Helper Architecture)<br />
+                        <b>Database:</b> MySQL, Firebase, MongoDB, DJango<br />
+                        <b>Version Controls & Tools:</b> Git, Gitlab, Github, Bitbucket, Jira, Confluence<br />
+                        <b>Testing & QA:</b> Jest, BrowserStack, TestFlight, Postman<br />
+                        <b>Accessibility:</b> JAWS, VoiceOver, ARIA standards
+                    </p>
                 </div>
 
                 {/* 3. Projects Example */}
                 <div className="content-block">
-                    <h3 className="content-heading">Projects</h3>
-                    <h5 className="content-subheading">Check out some of the cool things I have built over the years.</h5>
+                    <h3 className="content-heading">Projects & Experience</h3>
+                    <h5 className="content-subheading">Check out some of the cool things I have built over the years and my professional journey.</h5>
                     <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-                        <Button>See Projects</Button>
-                        <Button>My GitHub</Button>
+                        <div onClick={() => window.location.hash = '#/experiences'}>
+                            <Button>See Experience</Button>
+                        </div>
+                        <div onClick={() => window.open('https://github.com/manali0902', '_blank')}>
+                            <Button>My GitHub</Button>
+                        </div>
                     </div>
                 </div>
 
@@ -104,7 +115,9 @@ export default function Home({ hasScrolled }: HomeProps) {
                 <div className="content-block">
                     <h3 className="content-heading">Let's Connect!</h3>
                     <h5 className="content-subheading">I'd love to chat. Reach out anytime.</h5>
-                    <Button>Contact Me</Button>
+                    <div onClick={() => window.location.hash = '#/contact'}>
+                        <Button>Contact Me</Button>
+                    </div>
                 </div>
             </div>
         </React.Fragment>
