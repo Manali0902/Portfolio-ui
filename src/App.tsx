@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
@@ -7,13 +6,55 @@ import Projects from './components/Projects/Projects';
 import Experiences from './components/Experiences/Experiences';
 import Academics from './components/Academics/Academics';
 import Contact from './components/Contact/Contact';
+import { motion } from 'framer-motion';
+
+function CustomCursor() {
+  const [position, setPosition] = useState({ x: -100, y: -100 });
+  const [isHovering, setIsHovering] = useState(false);
+  const [isButton, setIsButton] = useState(false);
+
+  useEffect(() => {
+    const updatePosition = (e: MouseEvent) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+      const target = e.target as HTMLElement;
+      
+      const hoverable = target.closest('a, button, input, [role="button"], .hoverable, p, h1, h2, h3, h5, span');
+      setIsHovering(!!hoverable);
+      
+      const btn = target.closest('button, .custom-button, a');
+      setIsButton(!!btn);
+    };
+
+    window.addEventListener('mousemove', updatePosition);
+    return () => window.removeEventListener('mousemove', updatePosition);
+  }, []);
+
+  return (
+    <div 
+      className={`custom-cursor ${isHovering ? 'hovering' : ''} ${isButton ? 'hovering-button' : ''}`}
+      style={{ left: `${position.x}px`, top: `${position.y}px` }}
+    />
+  );
+}
+
+function SectionReveal({ children, id }: { children: React.ReactNode, id: string }) {
+  return (
+    <motion.section 
+      id={id}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      style={{ minHeight: "100vh", padding: "100px 20px" }}
+    >
+      {children}
+    </motion.section>
+  );
+}
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true); // User wants dark mode/pretty
   const [hasScrolled, setHasScrolled] = useState(false);
-
-  const location = useLocation();
-  const isHome = location.pathname === '/';
 
   const toggleTheme = () => {
     setIsDarkMode(prev => !prev);
@@ -21,32 +62,38 @@ function App() {
 
   useEffect(() => {
     const onScroll = () => {
-      // If we scroll down past 5px on Home it triggers Frame 2 transition
       setHasScrolled(window.scrollY > 5);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-
-    // Call ONCE right away to set scroll state correctly if restoring scroll position
     onScroll();
-
     return () => window.removeEventListener('scroll', onScroll);
-  }, [location.pathname]);
-
-  // If not on Home page, always show the Navbar
-  const isNavbarVisible = !isHome || hasScrolled;
+  }, []);
 
   return (
     <div className={`app-container ${isDarkMode ? 'dark' : ''}`}>
-      {/* Fixed navbar — visible when off hero OR on any other page entirely */}
-      <Navbar visible={isNavbarVisible} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+      <CustomCursor />
+      
+      <Navbar visible={true} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
 
-      <Routes>
-        <Route path="/" element={<Home hasScrolled={hasScrolled} />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/experiences" element={<Experiences />} />
-        <Route path="/academics" element={<Academics />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
+      <main>
+        <div id="home">
+            <Home hasScrolled={hasScrolled} />
+        </div>
+        
+        <div className={`continuous-content visible`} style={{ marginTop: hasScrolled ? '0' : '100px' }}>
+          <SectionReveal id="experiences">
+            <Experiences />
+          </SectionReveal>
+
+          <SectionReveal id="academics">
+            <Academics />
+          </SectionReveal>
+
+          <SectionReveal id="contact">
+            <Contact />
+          </SectionReveal>
+        </div>
+      </main>
     </div>
   );
 }
