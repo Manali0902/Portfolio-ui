@@ -1,53 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import './App.css';
-import Home from './components/Home/Home';
-import Navbar from './components/Navbar/Navbar';
-import Projects from './components/Projects/Projects';
-import Experiences from './components/Experiences/Experiences';
-import Academics from './components/Academics/Academics';
-import Contact from './components/Contact/Contact';
+import { useState, useEffect } from 'react';
+import Hero from './components/Hero';
+import AboutMe from './components/AboutMe';
+import Experience from './components/Experience';
+import Highlights from './components/Highlights';
+import Academics from './components/Academics';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+import CustomCursor from './components/CustomCursor';
+import Header from './components/Header';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [hasScrolled, setHasScrolled] = useState(false);
-
-  const location = useLocation();
-  const isHome = location.pathname === '/';
-
-  const toggleTheme = () => {
-    setIsDarkMode(prev => !prev);
-  };
 
   useEffect(() => {
-    const onScroll = () => {
-      // If we scroll down past 5px on Home it triggers Frame 2 transition
-      setHasScrolled(window.scrollY > 5);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
+    if (isDarkMode) {
+      document.documentElement.classList.remove('light');
+    } else {
+      document.documentElement.classList.add('light');
+    }
+  }, [isDarkMode]);
 
-    // Call ONCE right away to set scroll state correctly if restoring scroll position
-    onScroll();
-
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [location.pathname]);
-
-  // If not on Home page, always show the Navbar
-  const isNavbarVisible = !isHome || hasScrolled;
+  const toggleTheme = () => setIsDarkMode(prev => !prev);
 
   return (
-    <div className={`app-container ${isDarkMode ? 'dark' : ''}`}>
-      {/* Fixed navbar — visible when off hero OR on any other page entirely */}
-      <Navbar visible={isNavbarVisible} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+    <>
+      <CustomCursor />
 
-      <Routes>
-        <Route path="/" element={<Home hasScrolled={hasScrolled} />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/experiences" element={<Experiences />} />
-        <Route path="/academics" element={<Academics />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </div>
+      <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+
+      <main style={{ position: 'relative', zIndex: 1 }}>
+        <div id="home">
+          <Hero />
+        </div>
+        <Highlights />
+        <AboutMe />
+        <Experience />
+        <Academics />
+        <Contact />
+      </main>
+
+      <Footer />
+    </>
   );
 }
 
