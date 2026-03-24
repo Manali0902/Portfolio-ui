@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 import MoonIcon from '../../Icons/MoonIcon';
 import SunIcon from '../../Icons/SunIcon';
@@ -14,32 +13,34 @@ interface NavbarProps {
 
 export default function Navbar({ visible, isDarkMode, toggleTheme }: NavbarProps) {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    const location = useLocation();
-
-    // Close drawer automatically on route change
-    React.useEffect(() => {
-        setIsDrawerOpen(false);
-    }, [location.pathname]);
 
     const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
 
+    const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+        e.preventDefault();
+        setIsDrawerOpen(false);
+        const element = document.getElementById(targetId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <header className={`navbar ${visible ? 'navbar--visible' : ''} ${isDarkMode ? 'dark' : ''}`}>
-            <Link to="/" className="navbar__brand" aria-label="Home">
+            <a href="#home" onClick={(e) => handleLinkClick(e, 'home')} className="navbar__brand" aria-label="Home">
                 <img
                     src={isDarkMode ? '/logo-white.png' : '/logo-black.png'}
                     alt="Manali Gandhi Logo"
                     className="navbar__logo"
                 />
                 <span className="navbar__name">Manali Gandhi</span>
-            </Link>
+            </a>
 
             {/* Desktop Navigation */}
             <nav className="navbar__links desktop-only">
-                {/* <Link to="/projects" className="navbar__link">Projects</Link> */}
-                <Link to="/experiences" className="navbar__link">Experiences</Link>
-                <Link to="/academics" className="navbar__link">Academics</Link>
-                <Link to="/contact" className="navbar__link">Contact Me</Link>
+                <a href="#experiences" onClick={(e) => handleLinkClick(e, 'experiences')} className="navbar__link">Experiences</a>
+                <a href="#academics" onClick={(e) => handleLinkClick(e, 'academics')} className="navbar__link">Academics</a>
+                <a href="#contact" onClick={(e) => handleLinkClick(e, 'contact')} className="navbar__link">Contact Me</a>
             </nav>
 
             <div className="navbar__actions">
@@ -73,10 +74,9 @@ export default function Navbar({ visible, isDarkMode, toggleTheme }: NavbarProps
                     </button>
                 </div>
                 <nav className="navbar__drawer-links">
-                    {/* <Link to="/projects" className="navbar__drawer-link">Projects</Link> */}
-                    <Link to="/experiences" className="navbar__drawer-link">Experiences</Link>
-                    <Link to="/academics" className="navbar__drawer-link">Academics</Link>
-                    <Link to="/contact" className="navbar__drawer-link">Contact Me</Link>
+                    <a href="#experiences" onClick={(e) => handleLinkClick(e, 'experiences')} className="navbar__drawer-link">Experiences</a>
+                    <a href="#academics" onClick={(e) => handleLinkClick(e, 'academics')} className="navbar__drawer-link">Academics</a>
+                    <a href="#contact" onClick={(e) => handleLinkClick(e, 'contact')} className="navbar__drawer-link">Contact Me</a>
                 </nav>
             </div>
         </header>
