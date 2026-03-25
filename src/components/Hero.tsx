@@ -31,8 +31,8 @@ export default function Hero() {
             <div style={{ display: 'flex', flexWrap: 'wrap-reverse', alignItems: 'center', justifyContent: 'center', gap: '4rem', padding: '2rem', width: '100%', maxWidth: '1200px' }}>
 
                 {/* Text Block */}
-                <div style={{ flex: 1, minWidth: '350px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                    <h1 style={{ fontSize: '4rem', overflow: 'hidden', whiteSpace: 'nowrap', margin: 0, padding: '5px 0' }}>
+                <div style={{ flex: 1, minWidth: '250px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                    <h1 style={{ fontSize: '4rem', overflow: 'hidden', margin: 0, padding: '5px 0' }}>
                         {typingText1.split("").map((char, index) => (
                             <motion.span
                                 key={index}
@@ -75,9 +75,9 @@ export default function Hero() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
-                    style={{ flex: 1, display: 'flex', justifyContent: 'center', minWidth: '300px' }}
+                    style={{ flex: 1, display: 'flex', justifyContent: 'center', minWidth: '250px' }}
                 >
-                    <div style={{ position: 'relative', width: '350px', height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ position: 'relative', width: '100%', maxWidth: '350px', height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         {/* Decorative glow behind avatar */}
                         <div style={{ position: 'absolute', width: '100%', height: '100%', background: 'var(--accent-glow)', filter: 'blur(60px)', borderRadius: '50%', zIndex: 0 }}></div>
                         <canvas

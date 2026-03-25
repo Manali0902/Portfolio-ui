@@ -22,9 +22,9 @@ export default function Header({ isDarkMode, toggleTheme }: HeaderProps) {
     // Prevent scrolling when mobile menu is open
     useEffect(() => {
         if (isMobileMenuOpen) {
-            document.body.style.overflow = 'hidden';
+            document.body.style.overflowY = 'hidden';
         } else {
-            document.body.style.overflow = 'unset';
+            document.body.style.overflowY = '';
         }
     }, [isMobileMenuOpen]);
 
