@@ -22,6 +22,25 @@ function App() {
 
   const toggleTheme = () => setIsDarkMode(prev => !prev);
 
+  const currentPath = window.location.pathname;
+  if (currentPath !== '/' && currentPath !== '/index.html') {
+    return (
+      <>
+        <CustomCursor />
+        <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+        <main style={{ position: 'relative', zIndex: 1, minHeight: '80vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '2rem' }}>
+          <h1 style={{ fontSize: '6rem', margin: '0', background: 'var(--accent-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>404</h1>
+          <h2 style={{ fontSize: '2rem', margin: '1rem 0', color: 'var(--text-primary)' }}>Page Not Found</h2>
+          <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '500px' }}>
+            Oops! The page you are looking for doesn't exist or has been moved.
+          </p>
+          <a href="/" className="btn" style={{ textDecoration: 'none' }}>Go Back Home</a>
+        </main>
+        <Footer />
+      </>
+    );
+  }
+
   return (
     <>
       <CustomCursor />

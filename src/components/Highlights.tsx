@@ -18,7 +18,7 @@ const highlights = [
 export default function Highlights() {
   return (
     <section id="highlights" style={{ padding: '0rem 2rem 6rem 2rem', display: 'flex', justifyContent: 'center' }}>
-      <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap', width: '100%', maxWidth: '1200px' }}>
         {highlights.map((item, idx) => (
           <motion.div
             key={idx}
@@ -27,6 +27,7 @@ export default function Highlights() {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: idx * 0.2 }}
             className="flip-card"
+            style={{ flex: 1 }}
           >
             <div className="flip-card-inner">
               <div className="flip-card-front">

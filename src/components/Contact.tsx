@@ -32,7 +32,7 @@ export default function Contact() {
 
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
                     <h2 style={{ fontSize: '1.5rem', margin: 0, color: 'var(--text-primary)', textAlign: 'center' }}>Or shoot me an email</h2>
-                    <a href="mailto:gandhi.manali@outlook.com" className="btn" style={{ textDecoration: 'none' }}>
+                    <a href="mailto:gandhi.manali@outlook.com" className="btn" style={{ textDecoration: 'none', wordBreak: 'break-all', textAlign: 'center' }}>
                         gandhi.manali@outlook.com
                     </a>
                 </div>
