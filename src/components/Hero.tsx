@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import ShapeGrid from './react-bits/ShapeGrid';
 
 export default function Hero() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -27,8 +28,19 @@ export default function Hero() {
     const typingText3 = "I turn ideas into intelligent software. From scalable web systems to AI-driven tools, I build technology that solves real problems and feels effortless to use. Curious by nature and driven by innovation, I’m always exploring the next frontier of engineering.";
 
     return (
-        <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-            <div style={{ display: 'flex', flexWrap: 'wrap-reverse', alignItems: 'center', justifyContent: 'center', gap: '4rem', padding: '2rem', width: '100%', maxWidth: '1200px' }}>
+        <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', inset: 0, zIndex: 2, opacity: 0.3 }}>
+                <ShapeGrid
+                    speed={0.5}
+                    squareSize={40}
+                    direction="diagonal"
+                    borderColor="#271E37"
+                    hoverFillColor="#222222"
+                    shape="square"
+                    hoverTrailAmount={0}
+                />
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap-reverse', alignItems: 'center', justifyContent: 'center', gap: '4rem', padding: '2rem', width: '100%', maxWidth: '1200px', zIndex: 1, position: 'relative' }}>
 
                 {/* Text Block */}
                 <div style={{ flex: 1, minWidth: '250px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>

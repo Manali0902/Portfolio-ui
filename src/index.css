@@ -53,7 +53,6 @@ body {
 }
 
 * {
-  cursor: none !important;
   box-sizing: border-box;
 }
 
@@ -193,7 +192,6 @@ body::after {
   border: none;
   color: var(--text-primary);
   font-size: 1.5rem;
-  cursor: none;
   z-index: 100;
 }
 
@@ -227,7 +225,6 @@ body::after {
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.3s ease;
-  cursor: none;
 }
 
 /* .header-link:hover effect removed to let cursor dictate contrast */
@@ -242,7 +239,6 @@ body::after {
   padding: 0.5rem;
   border-radius: 50%;
   transition: transform 0.3s ease;
-  cursor: none;
 }
 
 .theme-toggle:hover {
