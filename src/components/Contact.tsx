@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import SpotlightCard from './react-bits/SpotlightCard';
-import LetterGlitch from './react-bits/LetterGlitch';
+// import LetterGlitch from './react-bits/LetterGlitch';
 
 export default function Contact() {
     return (
