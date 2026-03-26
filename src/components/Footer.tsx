@@ -11,7 +11,6 @@ export default function Footer() {
             gap: '1rem',
             background: 'var(--bg-primary)',
             backdropFilter: 'blur(10px)',
-            marginTop: '4rem'
         }}>
             <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                 © {new Date().getFullYear()} Manali Gandhi. All rights reserved.

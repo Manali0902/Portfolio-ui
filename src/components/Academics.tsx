@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion';
+import SpotlightCard from './react-bits/SpotlightCard';
+import DotGrid from './react-bits/DotGrid';
 
 const academicsData = [
     {
@@ -23,9 +25,23 @@ const academicsData = [
 
 export default function Academics() {
     return (
-        <section id="academics" style={{ padding: '6rem 2rem', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '1rem', fontSize: '3rem', background: 'var(--accent-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Academics & Achievements</h1>
-            <p style={{ textAlign: 'center', marginBottom: '5rem', color: 'var(--text-secondary)', fontSize: '1.2rem' }}>Education history and prominent awards won.</p>
+        <section id="academics" style={{ position: 'relative', overflow: 'hidden', padding: '6rem 2rem', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.15 }}>
+                <DotGrid
+                    dotSize={5}
+                    gap={15}
+                    baseColor="#5227FF"
+                    activeColor="#c084fc"
+                    proximity={120}
+                    shockRadius={50}
+                    shockStrength={5}
+                    resistance={50}
+                    returnDuration={1.5}
+                />
+            </div>
+            <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+                <h1 style={{ textAlign: 'center', marginBottom: '1rem', fontSize: '3rem', background: 'var(--accent-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Academics & Achievements</h1>
+                <p style={{ textAlign: 'center', marginBottom: '5rem', color: 'var(--text-secondary)', fontSize: '1.2rem' }}>Education history and prominent awards won.</p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%', maxWidth: '800px' }}>
                 {academicsData.map((item, index) => (
@@ -35,16 +51,21 @@ export default function Academics() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-50px" }}
                         transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className="glass-panel"
-                        style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}
                     >
-                        <h2 style={{ fontSize: '1.5rem', margin: 0, color: 'var(--text-primary)' }}>{item.degree}</h2>
-                        <h4 style={{ fontSize: '1rem', margin: 0, color: '#c084fc', fontWeight: 500 }}>
-                            {item.university} | <span style={{ color: 'var(--text-secondary)' }}>{item.date}</span>
-                        </h4>
-                        <p style={{ margin: 0, color: 'var(--text-secondary)', lineHeight: '1.6' }}>{item.details}</p>
+                        <SpotlightCard
+                            spotlightColor="rgba(96, 165, 250, 0.2)"
+                        >
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                                <h2 style={{ fontSize: '1.5rem', margin: 0, color: 'var(--text-primary)', fontFamily: 'var(--font-display)' }}>{item.degree}</h2>
+                                <h4 style={{ fontSize: '1rem', margin: 0, color: '#c084fc', fontWeight: 500 }}>
+                                    {item.university} | <span style={{ color: 'var(--text-secondary)' }}>{item.date}</span>
+                                </h4>
+                                <p style={{ margin: 0, color: 'var(--text-secondary)', lineHeight: '1.6' }}>{item.details}</p>
+                            </div>
+                        </SpotlightCard>
                     </motion.div>
                 ))}
+            </div>
             </div>
         </section>
     );

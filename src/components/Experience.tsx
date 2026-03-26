@@ -72,7 +72,7 @@ const TimelineItem = ({ exp, index }: { exp: typeof experiencesData[0], index: n
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        <motion.div 
+        <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -87,7 +87,7 @@ const TimelineItem = ({ exp, index }: { exp: typeof experiencesData[0], index: n
                 position: 'relative'
             }}
         >
-            <motion.div 
+            <motion.div
                 initial={{ scale: 0, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true, margin: "-100px" }}
@@ -102,7 +102,7 @@ const TimelineItem = ({ exp, index }: { exp: typeof experiencesData[0], index: n
                     borderRadius: '50%',
                     zIndex: 2,
                     boxShadow: '0 0 10px #c084fc'
-                }} 
+                }}
             />
 
             <div style={{
@@ -110,13 +110,12 @@ const TimelineItem = ({ exp, index }: { exp: typeof experiencesData[0], index: n
                 display: 'flex',
                 justifyContent: isLeft ? 'flex-end' : 'flex-start'
             }}>
-                <motion.div 
+                <motion.div
                     layout
                     className="glass-panel"
                     onClick={() => setIsExpanded(!isExpanded)}
                     style={{
                         padding: '2rem',
-                        cursor: 'none',
                         width: '100%',
                         textAlign: 'left',
                     }}
@@ -124,7 +123,7 @@ const TimelineItem = ({ exp, index }: { exp: typeof experiencesData[0], index: n
                 >
                     <motion.h2 layout style={{ margin: '0 0 0.5rem 0', color: 'var(--text-primary)', fontSize: '1.5rem' }}>{exp.title}</motion.h2>
                     <motion.h3 layout style={{ margin: '0 0 0.5rem 0', color: '#c084fc', fontSize: '1.2rem' }}>{exp.company}</motion.h3>
-                    
+
                     <AnimatePresence>
                         {isExpanded && (
                             <motion.div
@@ -140,7 +139,7 @@ const TimelineItem = ({ exp, index }: { exp: typeof experiencesData[0], index: n
                             </motion.div>
                         )}
                     </AnimatePresence>
-                    
+
                     <motion.div layout style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginTop: '1rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                         <span>{isExpanded ? 'Click to collapse' : 'Click to expand'}</span>
                     </motion.div>
@@ -175,38 +174,41 @@ export default function Experience() {
     });
 
     return (
-        <section id="experiences" ref={containerRef} style={{ position: 'relative', width: '100%', maxWidth: '1200px', margin: '0 auto', padding: '6rem 2rem', minHeight: '100vh' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '1rem', fontSize: '3rem', background: 'var(--accent-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>My Experience</h1>
-            <p style={{ textAlign: 'center', marginBottom: '5rem', color: 'var(--text-secondary)', fontSize: '1.2rem' }}>My professional journey throughout the years.</p>
-            
-            <div style={{ position: 'relative' }}>
-                <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    bottom: 0,
-                    left: 'calc(50% - 2px)',
-                    width: '4px',
-                    background: 'var(--glass-border)',
-                    borderRadius: '4px'
-                }} />
+        <section id="experiences" ref={containerRef} style={{ position: 'relative', width: '100%', overflow: 'hidden', margin: '0 auto', padding: '6rem 2rem', minHeight: '100vh' }}>
 
-                <motion.div style={{
-                    position: 'absolute',
-                    top: 0,
-                    bottom: 0,
-                    left: 'calc(50% - 2px)',
-                    width: '4px',
-                    background: 'var(--accent-gradient)',
-                    borderRadius: '4px',
-                    transformOrigin: 'top',
-                    scaleY: scrollYProgress,
-                    zIndex: 1
-                }} />
+            <div style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>
+                <h1 style={{ textAlign: 'center', marginBottom: '1rem', fontSize: '3rem', background: 'var(--accent-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>My Experience</h1>
+                <p style={{ textAlign: 'center', marginBottom: '5rem', color: 'var(--text-secondary)', fontSize: '1.2rem' }}>My professional journey throughout the years.</p>
 
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-                    {experiencesData.map((exp, index) => (
-                        <TimelineItem key={index} exp={exp} index={index} />
-                    ))}
+                <div style={{ position: 'relative' }}>
+                    <div style={{
+                        position: 'absolute',
+                        top: 0,
+                        bottom: 0,
+                        left: 'calc(50% - 2px)',
+                        width: '4px',
+                        background: 'var(--glass-border)',
+                        borderRadius: '4px'
+                    }} />
+
+                    <motion.div style={{
+                        position: 'absolute',
+                        top: 0,
+                        bottom: 0,
+                        left: 'calc(50% - 2px)',
+                        width: '4px',
+                        background: 'var(--accent-gradient)',
+                        borderRadius: '4px',
+                        transformOrigin: 'top',
+                        scaleY: scrollYProgress,
+                        zIndex: 1
+                    }} />
+
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+                        {experiencesData.map((exp, index) => (
+                            <TimelineItem key={index} exp={exp} index={index} />
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
